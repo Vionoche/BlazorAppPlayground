@@ -20,7 +20,11 @@ public class Program
             var app = CreateWebApplication(args);
             
             Log.Information("Application user name: " + GetApplicationUserName());
+
+            var runtimeVersion = System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription;
             
+            Log.Information("Runtime version: " + runtimeVersion);
+
             await app.RunAsync();
             
             Log.Information("Host terminated clearly");
