@@ -1,0 +1,48 @@
+﻿<div class="top-row ps-3 navbar navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="">BlazorApp</a>
+    </div>
+</div>
+
+<input type="checkbox" title="Navigation menu" class="navbar-toggler" />
+
+<div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
+    <nav class="flex-column">
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                <i class="bi bi-server" aria-hidden="true"></i> Static Server
+            </NavLink>
+        </div>
+        
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="interactive-server">
+                <span class="bi bi-server" aria-hidden="true"></span> Interactive Server
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="stream-rendering">
+                <span class="bi bi-server" aria-hidden="true"></span> Stream Rendering
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="interactive-web-assembly">
+                <span class="bi bi-cloud" aria-hidden="true"></span> Interactive WebAssembly
+            </NavLink>
+        </div>
+        
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="interactive-auto">
+                <span class="bi bi-cloud" aria-hidden="true"></span> Interactive Auto
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <a class="nav-link" href="/page">
+                <span class="bi bi-file-earmark" aria-hidden="true"></span> MVC
+            </a>
+        </div>
+    </nav>
+</div>
+

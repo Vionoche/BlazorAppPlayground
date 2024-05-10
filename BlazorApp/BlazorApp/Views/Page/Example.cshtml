@@ -1,0 +1,14 @@
+﻿@using BlazorApp.Lib.Components
+@{
+    ViewData["Title"] = "Razor Component Example";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>ASP.NET MVC Page (Controller + View)</p>
+
+@(await Html.RenderComponentAsync<SharedBlazorComponent>(RenderMode.Server))
+
+@section Scripts
+{
+    <script src="/_framework/blazor.web.js"></script>
+}

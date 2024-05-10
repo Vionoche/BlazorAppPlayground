@@ -1,0 +1,14 @@
+﻿<h3>Shared Blazor component from library</h3>
+
+<p role="status">Current count: @_currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+@code {
+    private void IncrementCount()
+    {
+        _currentCount++;
+    }
+    
+    private int _currentCount = 0;
+}
