@@ -3,6 +3,9 @@ using BlazorApp.Components;
 using BlazorApp.Components.Shared;
 using BlazorApp.Lib.Components;
 using Microsoft.AspNetCore.Http.HttpResults;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
 using Serilog;
 using _Imports = BlazorApp.Client._Imports;
 
@@ -70,6 +73,26 @@ public class Program
         
         builder.Services.AddHostedService<TimedHostedService>();
 
+        builder.Services.AddResourceMonitoring();
+        
+        var openTelemetry = builder.Services.AddOpenTelemetry();
+        
+        openTelemetry.ConfigureResource(resource => resource
+            .AddService(serviceName: builder.Environment.ApplicationName));
+        
+        // Add Metrics for ASP.NET Core and our custom metrics and export to Prometheus
+        openTelemetry.WithMetrics(metrics =>
+            metrics
+                .AddAspNetCoreInstrumentation()
+                .AddMeter("Microsoft.Extensions.Diagnostics.ResourceMonitoring")
+                .AddPrometheusExporter());
+        
+        openTelemetry.WithTracing(tracing =>
+        {
+            tracing.AddAspNetCoreInstrumentation();
+            tracing.AddHttpClientInstrumentation();
+        });
+
         var app = builder.Build();
 
         if (app.Environment.IsDevelopment())
@@ -84,6 +107,7 @@ public class Program
 
         app.UseStaticFiles();
         app.UseAntiforgery();
+        app.MapPrometheusScrapingEndpoint();
 
         app.MapRazorComponents<App>()
             .AddInteractiveServerRenderMode()
