@@ -96,8 +96,8 @@ public class Program
 
         app.MapDefaultControllerRoute();
         
-        app.MapGet("/shared", () => new RazorComponentResult<SharedBlazorComponent>());
-        app.MapGet("/enhanced-shared", () => new RazorComponentResult<EnhancedSharedBlazorPage>());
+        app.MapGet("/shared1", () => new RazorComponentResult<SharedBlazorComponent>());
+        app.MapGet("/shared2", () => new RazorComponentResult<EnhancedSharedBlazorComponent>());
 
         return app;
     }
